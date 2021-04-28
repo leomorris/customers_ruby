@@ -11,8 +11,8 @@ class CustomersController < ApplicationController
   end
 
   def show
-    customer_id = params[:id].to_i
-    big_commerce_orders = Order.get_orders(customer_id)
+    @customer_id = params[:id].to_i
+    big_commerce_orders = Order.get_orders(@customer_id)
     @lifetime_value = 0
     @orders = Array.new
     big_commerce_orders.each do |big_commerce_order|
