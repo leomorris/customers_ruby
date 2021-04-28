@@ -1,0 +1,22 @@
+<% content_for :title, 'Customers' %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th># of Orders</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @customers.each do |customer| %>
+    <tr>
+      <td><%= "#{customer.first_name} #{customer.last_name}" %></td>
+      <td><%= customer.order_count %></td>
+      <td><%= link_to_if(customer.order_count > 0, "Order history", customer_path(:id => customer.id)) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<%= link_to_if(@page > 1, "< Prev", {controller: 'customers', action: 'index', page: @page-1}) %>
+<%= link_to_if(@customers.length == 50, "Next >", {controller: 'customers', action: 'index', page: @page+1}) %>
+
